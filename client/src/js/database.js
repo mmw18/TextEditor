@@ -12,7 +12,7 @@ const initdb = async () =>
     },
   });
 
-
+// Exporting function we will use to post/update content from the database
 export const putDb = async (content) => {
   try {
     // Opening database, named JATE, version 1
@@ -37,7 +37,25 @@ export const putDb = async (content) => {
   }
 };
 
-// TODO: Add logic for a method that gets all the content from the database
-export const getDb = async () => console.error('getDb not implemented');
+// Exporting function we will use to GET all content from the database.
+export const getDb = async () => {
+  console.log('GET from the database');
+
+  // Creating a connection to the 'JATE' database, specifying version 1.
+  const db = await openDB('JATE', 1);
+
+  // Creating a new transaction, specifying object store and setting it to 'readonly'.
+  const tx = db.transaction('JATE', 'readonly');
+
+  // Opening the desired object store.
+  const store = tx.objectStore('JATE');
+
+  // Using the .getAll() method to get all data from the store.
+  const result = await store.getAll();
+
+  // Logging the results andreturning them
+  console.log('All data from the database:', result);
+  return result;
+};
 
 initdb();
