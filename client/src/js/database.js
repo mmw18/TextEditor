@@ -15,12 +15,12 @@ const initdb = async () =>
 
 export const putDb = async (content) => {
   try {
-    // Opening database, named textEditor_db, version 1
-    const db = await openDB('textEditor_db', 1);
-    // Starting a new read/write transaction on the 'notes' object store
-    const tx = db.transaction('notes', 'readwrite');
-    // Accessing the 'notes' object store
-    const store = tx.objectStore('notes');
+    // Opening database, named JATE, version 1
+    const db = await openDB('JATE', 1);
+    // Starting a new read/write transaction on the 'JATE' object store
+    const tx = db.transaction('JATE', 'readwrite');
+    // Accessing the 'JATE' object store
+    const store = tx.objectStore('JATE');
     // Attempt to add or update the content within the store
     const request = store.put(content);
     // Waiting for the request to complete and get the result
