@@ -1,3 +1,13 @@
+// Installing event listener
+self.addEventListener('install', (event) => {
+  console.log('Service Worker installing.');
+});
+
+// Activating event listener
+self.addEventListener('activate', (event) => {
+  console.log('Service Worker activating.');
+});
+
 const { offlineFallback, warmStrategyCache } = require('workbox-recipes');
 const { CacheFirst } = require('workbox-strategies');
 const { registerRoute } = require('workbox-routing');

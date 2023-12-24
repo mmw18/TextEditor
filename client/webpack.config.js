@@ -22,7 +22,7 @@ module.exports = () => {
     plugins: [
       new InjectManifest({
         // Source file for our service worker
-        swSrc: 'src-sw.js',
+        swSrc: './src-sw.js',
         // SW file that is generated in output directory
         swDest: 'service-worker.js', 
       }),
@@ -68,6 +68,10 @@ module.exports = () => {
             },
           },
         },
+        {
+          test: /\.css$/i,
+          use: ['style-loader', 'css-loader'],
+        },        
       ],
     },
   };
