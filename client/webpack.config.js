@@ -53,25 +53,24 @@ module.exports = () => {
     ],
 
     module: {
+      // CSS loaders
       rules: [
-        {
-          // Apply rule to JavaScript files
-          test: /\.js$/,
-          // Exclude the node_mocules collection
-          exclude: /node_modules/,
-          use: {
-            // Use babel-loader to transpile JavaScript files
-            loader: 'babel-loader',
-            options: {
-              // Preset used for transpiling
-              presets: ['@babel/preset-env'],
-            },
-          },
-        },
         {
           test: /\.css$/i,
           use: ['style-loader', 'css-loader'],
-        }        
+        },
+        {
+          test: /\.m?js$/,
+          exclude: /node_modules/,
+          // We use babel-loader in order to use ES6.
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env'],
+              plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/transform-runtime'],
+            },
+          },
+        },
       ],
     },
   };
