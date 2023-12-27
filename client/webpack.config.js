@@ -20,12 +20,16 @@ module.exports = () => {
       path: path.resolve(__dirname, 'dist'),
     },
     plugins: [
-      new InjectManifest({
-        // Source file for our service worker
-        swSrc: './src-sw.js',
-        // SW file that is generated in output directory
-        swDest: 'service-worker.js', 
-      }),
+      new HtmlWebpackPlugin({
+        template: './dist/index.html',
+        filename: 'index.html', // name of output file in dist/
+      }),      
+      // new InjectManifest({
+      //   // Source file for our service worker
+      //   swSrc: './src-sw.js',
+      //   // SW file that is generated in output directory
+      //   swDest: 'service-worker.js', 
+      // }),
       new WebpackPwaManifest({
         // To not add unique fingerprints to the filenames
         fingerprints: false,
