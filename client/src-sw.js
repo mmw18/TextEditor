@@ -9,7 +9,7 @@ self.addEventListener('activate', (event) => {
 });
 
 const { offlineFallback, warmStrategyCache } = require('workbox-recipes');
-const { CacheFirst } = require('workbox-strategies');
+const { CacheFirst, StaleWhileRevalidate } = require('workbox-strategies');
 const { registerRoute } = require('workbox-routing');
 const { CacheableResponsePlugin } = require('workbox-cacheable-response');
 const { ExpirationPlugin } = require('workbox-expiration');
@@ -52,18 +52,3 @@ registerRoute(
   })
 );
 
-// Image caching
-registerRoute(
-  ({ request }) => request.destination === 'image',
-
-  new StaleWhileRevalidate({
-    // Name of cache storage - for images
-    cacheName: 'image-cache', 
-    plugins: [
-      new CacheableResponsePlugin({
-        // Cache responses with status 0 (opaque) and 200 (success).
-        statuses: [0, 200], 
-      }),
-    ],
-  })
-);

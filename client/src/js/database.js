@@ -1,13 +1,13 @@
 import { openDB } from 'idb';
 
 const initdb = async () =>
-  openDB('jate', 1, {
+  openDB('JATE', 1, {
     upgrade(db) {
-      if (db.objectStoreNames.contains('jate')) {
+      if (db.objectStoreNames.contains('JATE')) {
         console.log('jate database already exists');
         return;
       }
-      db.createObjectStore('jate', { keyPath: 'id', autoIncrement: true });
+      db.createObjectStore('JATE', { keyPath: 'id', autoIncrement: true });
       console.log('jate database created');
     },
   });
@@ -22,7 +22,7 @@ export const putDb = async (content) => {
     // Accessing the 'JATE' object store
     const store = tx.objectStore('JATE');
     // Attempt to add or update the content within the store
-    const request = store.put(content);
+    const request = store.put({id:1, value:content});
     // Waiting for the request to complete and get the result
     const result = await request;
     // Ensuring transaction is completed before moving on
@@ -50,12 +50,12 @@ export const getDb = async () => {
   // Opening the desired object store.
   const store = tx.objectStore('JATE');
 
-  // Using the .getAll() method to get all data from the store.
-  const result = await store.getAll();
+  // Using the .get(1) method to get all data from the store.
+  const result = await store.get(1);
 
   // Logging the results andreturning them
   console.log('All data from the database:', result);
-  return result;
+  return result?.value;
 };
 
 initdb();
