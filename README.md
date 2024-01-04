@@ -46,7 +46,7 @@ At its core, the application is a single-page application (SPA) that not only ad
 
 ## Deployed Application
 
-Check out the live version: [Deployed Application Link]
+Check out the live version: [Deployed Application Link](https://text-editor-mmw18-1a3f7b5bdedd.herokuapp.com)
 
 ## Acknowledgments
 
